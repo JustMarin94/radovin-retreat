@@ -1,11 +1,20 @@
-import styled, { css } from "styled-components"; // Import css helper
+import styled, { css } from "styled-components";
 
 export const CalendarContainer = styled.div`
-  width: 420px;
-  margin: 40px auto;
+  width: 100%;
+  max-width: 400px; /* Maximum width for desktop */
+  margin: 10px auto; /* Center horizontally with smaller vertical margin */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    max-width: 90%; /* Use 90% of screen width on mobile */
+    margin: 10px auto; /* Ensure centering */
+    padding: 8px;
+  }
 `;
 
 export const Header = styled.div`
@@ -15,7 +24,7 @@ export const Header = styled.div`
   background-color: white;
   color: #4a90e2;
   padding: 10px;
-  font-size: 28px;
+  font-size: 24px; /* Slightly smaller for better fit */
 `;
 
 export const MonthYear = styled.div`
@@ -27,26 +36,32 @@ export const DaysGrid = styled.div`
   grid-template-columns: repeat(7, 1fr);
   background-color: white;
   color: #333;
+  gap: 4px;
 `;
 
 export const Day = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px; /* Ensure equal width and height for perfect circle */
-  height: 30px; /* Equal height for circular shape */
-  margin: 6px 0; /* Add top/bottom margin for spacing */
-  font-size: 16px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-sizing: border-box;
+  border-radius: 50%;
+  line-height: 1;
+  padding: 2px;
 
-  /* Use the $ prefix for transient props */
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
+
   ${(props) =>
     props.$isInRange &&
     css`
       background-color: rgb(198, 237, 242);
       color: #006064;
-      border-radius: 50%;
     `}
 
   ${(props) =>
@@ -54,7 +69,6 @@ export const Day = styled.div`
     css`
       background-color: rgb(87, 156, 230);
       color: white;
-      border-radius: 50%; /* Ensure perfect circle */
       font-weight: bold;
       border: 1px solid #0056b3;
     `}
@@ -96,7 +110,6 @@ export const Day = styled.div`
       `}
     `}
 
-  /* Hover effect */
   &:hover {
     ${(props) =>
       !props.$isDisabled &&
@@ -104,14 +117,12 @@ export const Day = styled.div`
       css`
         background-color: #f8f9fa;
         border: 1px solid #dee2e6;
-        border-radius: 50%; /* Ensure circular border on hover */
       `}
     ${(props) =>
       (props.$isDisabled || props.$isBooked) &&
       css`
         background-color: ${props.$isBooked ? "#eeeeee" : "transparent"};
         border: 1px solid transparent;
-        border-radius: 0;
       `}
   }
 `;
@@ -119,13 +130,12 @@ export const Day = styled.div`
 export const Weekday = styled(Day)`
   font-weight: bold;
   background-color: white;
-  color: #6c757d; // Slightly muted color for weekdays
+  color: #6c757d;
   cursor: default;
   pointer-events: none;
   opacity: 1;
   &:hover {
-    background-color: white; // No hover effect for weekdays
+    background-color: white;
     border: 1px solid transparent;
-    border-radius: 0;
   }
 `;

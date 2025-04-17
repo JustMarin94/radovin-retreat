@@ -224,16 +224,21 @@ export default function Homepage() {
   };
 
   const calendarSectionStyle = {
-    maxWidth: "900px", // Adjust max-width to fit two calendars comfortably
+    maxWidth: "900px", // Wide enough for two 400px calendars + 20px gap
     margin: "20px auto",
     padding: "10px",
+    width: "100%", // Ensure full available width
   };
 
   const calendarContainerStyle = {
     display: "flex",
-    flexWrap: "wrap", // Allows wrapping on smaller screens if needed
-    justifyContent: "center", // Center calendars horizontally
-    gap: "20px", // Add space between calendars
+    flexWrap: "wrap", // Allow wrapping on smaller screens
+    justifyContent: "center",
+    gap: "20px",
+    width: "100%",
+    "@media (min-width: 900px)": {
+      flexWrap: "nowrap", // Prevent wrapping on large screens
+    },
   };
 
   const navigationStyle = {
@@ -249,14 +254,13 @@ export default function Homepage() {
   return (
     <Container maxWidth="xl" sx={{ padding: 1 }}>
       <AppAppBar />
-      <Grid container spacing={1}>
-        <Grid>
+      <Grid container spacing={18} alignItems="flex-start">
+        <Grid item xs={12} md={6}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Box sx={formBoxStyle}>
               <Typography variant="h6" component="h2" gutterBottom>
                 Add New Booking
               </Typography>
-              {/* FormControls remain the same */}
               <FormControl fullWidth sx={{ mb: 2 }}>
                 <FormLabel>Name</FormLabel>
                 <TextField
@@ -293,11 +297,7 @@ export default function Homepage() {
                   helperText={errors.guests?.message}
                 />
               </FormControl>
-
-              {/* Display selected dates */}
               <Typography sx={{ mt: 1, mb: 1, minHeight: "1.5em" }}>
-                {" "}
-                {/* Add minHeight to prevent layout jump */}
                 Selected:{" "}
                 {selectedStartDate
                   ? new Date(selectedStartDate).toLocaleDateString()
@@ -307,8 +307,6 @@ export default function Homepage() {
                   ? new Date(selectedEndDate).toLocaleDateString()
                   : "..."}
               </Typography>
-
-              {/* Display Error Message */}
               {error && (
                 <Typography color="error" sx={{ mb: 2 }}>
                   {error}
@@ -319,7 +317,7 @@ export default function Homepage() {
                 variant="contained"
                 disabled={
                   isSubmitting || !selectedStartDate || !selectedEndDate
-                } // Disable if submitting or dates not selected
+                }
                 sx={{ mt: 2 }}
               >
                 {isSubmitting ? "Booking..." : "Confirm Booking"}
@@ -329,51 +327,48 @@ export default function Homepage() {
           <Snackbar
             open={open}
             closeFunc={handleClose}
-            message="Request confirmend. You will recive an email soon."
+            message="Request confirmed. You will receive an email soon."
           />
         </Grid>
 
-        <Grid>
-          {/* --- Calendar Section --- */}
+        <Grid item xs={12} md={6}>
           <Box sx={calendarSectionStyle}>
-            {/* Month Navigation */}
             <Box sx={navigationStyle}>
               <IconButton
                 onClick={handlePreviousMonths}
-                disabled={currentMonthIndex === 0} // Disable if showing Jan/Feb
+                disabled={currentMonthIndex === 0}
                 aria-label="Previous months"
               >
                 <ArrowBackIosNewIcon />
               </IconButton>
               <IconButton
                 onClick={handleNextMonths}
-                disabled={currentMonthIndex >= 10} // Disable if showing Nov/Dec
+                disabled={currentMonthIndex >= 10}
                 aria-label="Next months"
               >
                 <ArrowForwardIosIcon />
               </IconButton>
             </Box>
-
-            {/* Calendar Display */}
             <Box sx={calendarContainerStyle}>
               {monthsToDisplayIndices.map((monthIndex) => (
-                // The key should be stable, monthIndex is fine here
-                <div
+                <Box
                   key={monthIndex}
-                  style={{ flex: "1 1 400px", maxWidth: "450px" }}
+                  sx={{
+                    flex: "0 0 400px", // Fixed basis to match CalendarContainer max-width
+                    maxWidth: "400px",
+                    minWidth: "300px",
+                    margin: "0 auto", // Center within flex item
+                  }}
                 >
-                  {" "}
-                  {/* Adjust flex basis and max-width */}
                   <Calendar
-                    dateRanges={dateRanges}
                     onDateClick={handleDateClick}
                     selectedStartDate={selectedStartDate}
                     selectedEndDate={selectedEndDate}
-                    isDateBooked={isDateBooked} // Pass the booking check function
+                    isDateBooked={isDateBooked}
                     year={year}
-                    month={monthIndex} // Pass the calculated month index
+                    month={monthIndex}
                   />
-                </div>
+                </Box>
               ))}
             </Box>
           </Box>

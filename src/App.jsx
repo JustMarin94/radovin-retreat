@@ -5,6 +5,11 @@ import Homepage from "./pages/Homepage";
 import Contact from "./pages/Contact";
 import withRoot from "./onepirate/modules/withRoot";
 
+// Simple NotFound component
+function NotFound() {
+  return <h1>404 - Page Not Found</h1>;
+}
+
 function App() {
   return (
     <React.Fragment>
@@ -12,6 +17,7 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/booking" element={<Homepage />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </React.Fragment>
   );
