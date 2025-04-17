@@ -20,10 +20,12 @@ const ImageIconButton = styled("div")(({ theme }) => ({
   display: "block",
   padding: 0,
   borderRadius: 0,
-  height: "40vh",
+  width: "33%",
+  paddingTop: "33%",
+  height: 0,
   [theme.breakpoints.down("md")]: {
     width: "100% !important",
-    height: 100,
+    paddingTop: "100%",
   },
   "& .imageMarked": {
     height: 3,

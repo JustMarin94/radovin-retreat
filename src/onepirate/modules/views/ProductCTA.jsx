@@ -21,10 +21,10 @@ function ProductCTA() {
   return (
     <Container
       component="section"
-      sx={{ mt: 10, display: "flex", justifyContent: "start", maxWidth: 1200 }}
+      sx={{ mt: 10, display: "flex", justifyContent: "center", maxWidth: 1200 }}
     >
-      <Grid container>
-        <Grid size={{ xs: 12, md: 6 }} sx={{ zIndex: 3 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6} sx={{ zIndex: 3 }}>
           <Box
             sx={{
               display: "flex",
@@ -33,7 +33,8 @@ function ProductCTA() {
               bgcolor: "warning.main",
               py: 8,
               px: 3,
-              width: 600, // 600px content + 48px padding
+              width: { xs: "100%", sm: 400, md: 600 }, // Responsive width
+              maxWidth: "100%", // Ensure it doesn't overflow
               boxSizing: "border-box",
             }}
           >
@@ -43,7 +44,11 @@ function ProductCTA() {
             {testimonials.map((testimonial, index) => (
               <Box
                 key={index}
-                sx={{ mt: 3, textAlign: "center", maxWidth: 400 }}
+                sx={{
+                  mt: 3,
+                  textAlign: "center",
+                  maxWidth: { xs: "100%", sm: 350 }, // Adjust content width
+                }}
               >
                 <Typography variant="h6" sx={{ fontStyle: "italic" }}>
                   "{testimonial.quote}"
@@ -59,9 +64,11 @@ function ProductCTA() {
           </Box>
         </Grid>
         <Grid
-          size={{ xs: 12, md: 6 }}
+          item
+          xs={12}
+          md={6}
           sx={{
-            display: { md: "block", xs: "none" },
+            display: { md: "block", xs: "none" }, // Hide image on mobile
             position: "relative",
           }}
         >
@@ -72,10 +79,10 @@ function ProductCTA() {
             sx={{
               position: "absolute",
               top: -28,
-              left: 250,
-              right: 0,
-              bottom: 0,
-              width: 600,
+              left: { md: 250 }, // Only apply offset on medium screens+
+              width: { md: 600, sm: 400, xs: "100%" }, // Responsive image width
+              maxWidth: "100%", // Prevent overflow
+              height: "auto", // Maintain aspect ratio
             }}
           />
         </Grid>

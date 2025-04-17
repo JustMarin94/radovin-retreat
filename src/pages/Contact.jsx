@@ -6,10 +6,12 @@ export default function Contact() {
   return (
     <>
       <AppAppBar />
-      <Container maxWidth="md" sx={{ py: 12 }}>
+      <Container maxWidth="md" sx={{ py: 2 }}>
         <Typography variant="h3" gutterBottom>
           Contact Information
         </Typography>
+
+        <br></br>
 
         <Box sx={{ mb: 3 }}>
           <Typography variant="h4">Owner Details</Typography>
