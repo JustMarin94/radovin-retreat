@@ -19,7 +19,7 @@ export default function Contact() {
             <strong>Name:</strong> Zlatko Dundović
           </Typography>
           <Typography variant="h5">
-            <strong>Phone / WhatsApp / Viber:</strong> +385 99 579 5954
+            <strong>Phone / WhatsApp / Viber:</strong> <br></br>+385 99 579 5954
           </Typography>
           <Typography variant="h5">
             <strong>Email:</strong> 58628394du@gmail.com
@@ -29,7 +29,7 @@ export default function Contact() {
         <Box sx={{ mb: 3 }}>
           <Typography variant="h4">Property Address</Typography>
           <Typography variant="h5">
-            Hrvatskih Branitelja Stipana Dundovića, 23248 Ražanac, Croatia
+            Hrvatskih Branitelja Stipana Dundovića 52, 23248 Ražanac, Croatia
           </Typography>
         </Box>
 
