@@ -37,7 +37,9 @@ export default function Homepage() {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [error, setError] = useState(null);
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(
+    new Date().getMonth()
+  );
   const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {

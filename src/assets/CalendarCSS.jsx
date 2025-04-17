@@ -30,22 +30,31 @@ export const DaysGrid = styled.div`
 `;
 
 export const Day = styled.div`
-  /* Same styles as before */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px; /* Ensure equal width and height for perfect circle */
+  height: 30px; /* Equal height for circular shape */
+  margin: 6px 0; /* Add top/bottom margin for spacing */
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 
   /* Use the $ prefix for transient props */
   ${(props) =>
     props.$isInRange &&
     css`
-      background-color: #e0f7fa; /* Light cyan/blue for selection range */
+      background-color: rgb(198, 237, 242);
       color: #006064;
+      border-radius: 50%;
     `}
 
   ${(props) =>
     props.$isSelected &&
     css`
-      background-color: #007bff;
+      background-color: rgb(87, 156, 230);
       color: white;
-      border-radius: 50%;
+      border-radius: 50%; /* Ensure perfect circle */
       font-weight: bold;
       border: 1px solid #0056b3;
     `}
@@ -86,6 +95,7 @@ export const Day = styled.div`
         color: #ccc;
       `}
     `}
+
   /* Hover effect */
   &:hover {
     ${(props) =>
@@ -94,7 +104,7 @@ export const Day = styled.div`
       css`
         background-color: #f8f9fa;
         border: 1px solid #dee2e6;
-        border-radius: 50%;
+        border-radius: 50%; /* Ensure circular border on hover */
       `}
     ${(props) =>
       (props.$isDisabled || props.$isBooked) &&

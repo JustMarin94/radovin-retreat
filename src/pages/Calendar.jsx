@@ -97,23 +97,6 @@ const Calendar = ({
           const isBooked = checkIsBooked(day); // Is it part of an *existing* booking?
           const isDisabled = isBooked; // Disable clicks if already booked
 
-          // Determine background color based on state
-          let backgroundColor = "transparent";
-          if (isWithinSelection) {
-            backgroundColor = "#aaddff"; // Light blue for selection range
-          } else if (isBooked) {
-            backgroundColor = "#f0f0f0"; // Light gray for booked dates
-          }
-
-          // Determine text color
-          let textColor = "#333"; // Default text color
-          if (isBooked) {
-            textColor = "#aaaaaa"; // Lighter text for booked/disabled
-          }
-
-          // Determine cursor style
-          const cursor = !day || isDisabled ? "not-allowed" : "pointer";
-
           return (
             <Day
               key={index}
@@ -126,22 +109,6 @@ const Calendar = ({
               $isInRange={isWithinSelection && !isBooked}
               $isDisabled={isDisabled || !day}
               onClick={() => handleDateClickInternal(day)}
-              style={{
-                backgroundColor: backgroundColor,
-                cursor: cursor,
-                opacity: !day || isBooked ? 0.5 : 1,
-                color: textColor,
-                border:
-                  formattedDateStr === selectedStartDate ||
-                  formattedDateStr === selectedEndDate
-                    ? "2px solid #007bff"
-                    : "none",
-                borderRadius:
-                  formattedDateStr === selectedStartDate ||
-                  formattedDateStr === selectedEndDate
-                    ? "50%"
-                    : "0",
-              }}
             >
               {day}
             </Day>
